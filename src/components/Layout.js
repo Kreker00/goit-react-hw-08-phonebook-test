@@ -5,12 +5,12 @@ import { Suspense } from 'react';
 
 export const Layout = () => {
   return (
-    <div>
+    <header>
       <AppBar />
       <Suspense fallback={<h2>Loading..</h2>}>
         <Outlet />
       </Suspense>
       <Toaster position="top-right" reverseOrder={false} />
-    </div>
+    </header>
   );
 };

@@ -1,15 +1,19 @@
-import { Navigation } from '../Navigation/Navigation';
-import { UserMenu } from '../UserMenu/UserMenu';
-import { AuthNav } from '../AuthNav/AuthNav';
-import { useAuth } from '../../hooks/useAuth';
+import React from 'react';
+import { useAuth } from 'hooks/useAuth';
+import { Navigation } from 'components/Navigation/Navigation';
+import { UserMenu } from 'components/UserMenu/UserMenu';
+import { AuthNav } from 'components/AuthNav/AuthNav';
+import { StyledAppBar, StyledToolbar } from './AppBar.styled';
 
 export const AppBar = () => {
   const { isLoggedIn } = useAuth();
 
   return (
-    <header>
-      <Navigation />
-      {isLoggedIn ? <UserMenu /> : <AuthNav />}
-    </header>
+    <StyledAppBar position="static">
+      <StyledToolbar>
+        <Navigation />
+        {isLoggedIn ? <UserMenu /> : <AuthNav />}
+      </StyledToolbar>
+    </StyledAppBar>
   );
 };

@@ -1,7 +1,11 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { StyledSearchFilter, ContactTitle } from './SearchFilter.styled';
-import { changeFilter } from '../../redux/contacts/filterSlice';
+import {
+  StyledSearchFilter,
+  ContactTitle,
+  StyledInput,
+} from './SearchFilter.styled';
+import { changeFilter } from 'redux/contacts/filterSlice';
 
 export const SearchFilter = () => {
   const dispatch = useDispatch();
@@ -11,7 +15,11 @@ export const SearchFilter = () => {
       <ContactTitle>Contacts</ContactTitle>
       <StyledSearchFilter>
         <h2>Search contacts</h2>
-        <input onChange={e => dispatch(changeFilter(e.target.value))} />
+        <StyledInput
+          type="text"
+          placeholder="Search..."
+          onChange={e => dispatch(changeFilter(e.target.value))}
+        />
       </StyledSearchFilter>
     </>
   );

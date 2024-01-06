@@ -2,8 +2,8 @@ import * as Yup from 'yup';
 import { Formik, Field } from 'formik';
 import { StyledForm, Error, Title } from './ContactEntryForm.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectContacts } from '../../redux/contacts/selectors';
-import { addContact } from '../../redux/contacts/operations';
+import { selectContacts } from 'redux/contacts/selectors';
+import { addContact } from 'redux/contacts/operations';
 
 export const ContactEntryForm = () => {
   const contacts = useSelector(selectContacts);
@@ -48,12 +48,12 @@ export const ContactEntryForm = () => {
 already in contacts.`);
       return;
     }
-    dispatch(addContact(newContact));
+    dispatch(addContact({ name: newContact.name, number: newContact.phone }));
   };
 
   return (
     <>
-      <Title>Phonebook</Title>
+      <Title>YOUR CONTACTS</Title>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
