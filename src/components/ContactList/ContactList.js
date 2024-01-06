@@ -6,12 +6,12 @@ import {
   StyledContactItem,
   StyledDeleteButton,
 } from './ContactList.styled';
-import { deleteContact } from '../../redux/operations';
+import { deleteContact } from '../../redux/contacts/operations';
 import {
   selectError,
   selectIsLoading,
   selectVisibleContacts,
-} from '../../redux/selectors';
+} from '../../redux/contacts/selectors';
 
 export const ContactList = () => {
   const dispatch = useDispatch();

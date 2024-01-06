@@ -1,27 +1,31 @@
-import { ContactEntryForm } from './ContactEntryForm/ContactEntryForm';
-import { ContactList } from './ContactList/ContactList';
-import { SearchFilter } from './SearchFilter/SearchFilter';
-import { GlobalStyle } from './GlobalStyle';
-import { fetchContacts } from '../redux/operations';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { Route, Routes } from 'react-router-dom';
+import { Layout } from './Layout';
+import Contacts from 'pages/Contacts';
+import Register from 'pages/Register';
+import Home from 'pages/Home';
+import Login from 'pages/Login';
+import { refreshUser } from 'redux/auth/operations';
 import { useEffect } from 'react';
-import { selectIsLoading, selectError } from '../redux/selectors';
+import { selectIsRefreshing } from 'redux/auth/selectors';
 
 export const App = () => {
   const dispatch = useDispatch();
-  const isLoading = useSelector(selectIsLoading);
-  const error = useSelector(selectError);
+  const { isRefreshing } = selectIsRefreshing();
 
   useEffect(() => {
-    dispatch(fetchContacts());
+    dispatch(refreshUser());
   }, [dispatch]);
-  return (
-    <>
-      <ContactEntryForm />
-      {isLoading && !error && <b>Request in progress...</b>}
-      <SearchFilter />
-      <ContactList />
-      <GlobalStyle />
-    </>
+  return isRefreshing ? (
+    <b>Refreshing user...</b>
+  ) : (
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/contacts" element={<Contacts />} />
+      </Route>
+    </Routes>
   );
 };
