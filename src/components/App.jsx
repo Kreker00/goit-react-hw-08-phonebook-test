@@ -7,11 +7,11 @@ import Home from 'pages/Home';
 import Login from 'pages/Login';
 import { refreshUser } from 'redux/auth/operations';
 import { useEffect } from 'react';
-import { selectIsRefreshing } from 'redux/auth/selectors';
+import { useAuth } from '../hooks/useAuth';
 
 export const App = () => {
   const dispatch = useDispatch();
-  const { isRefreshing } = selectIsRefreshing();
+  const { isRefreshing } = useAuth();
 
   useEffect(() => {
     dispatch(refreshUser());

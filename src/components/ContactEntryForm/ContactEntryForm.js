@@ -13,8 +13,8 @@ export const ContactEntryForm = () => {
     name: Yup.string().required('Name is required'),
     phone: Yup.string()
       .matches(
-        /^\d{3}-\d{3}-\d{4}$/,
-        'Phone number must be in the format "000-000-0000"'
+        /^\d{3}-\d{2}-\d{2}$/,
+        'Phone number must be in the format "111-11-11"'
       )
       .required('Number is required'),
   });
@@ -27,13 +27,12 @@ export const ContactEntryForm = () => {
   const formatPhoneNumber = value => {
     const phoneNumber = value.replace(/\D/g, '');
 
-    if (phoneNumber.length <= 10) {
-      return phoneNumber.replace(/(\d{3})(\d{0,3})(\d{0,4})/, '$1-$2-$3');
+    if (phoneNumber.length <= 8) {
+      return phoneNumber.replace(/(\d{3})(\d{0,2})(\d{0,2})/, '$1-$2-$3');
     } else {
-      return phoneNumber.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
+      return phoneNumber.replace(/(\d{3})(\d{2})(\d{2})/, '$1-$2-$3');
     }
   };
-
   const handlePhoneChange = (e, setFieldValue) => {
     const { value } = e.target;
     const formattedValue = formatPhoneNumber(value);
@@ -45,7 +44,8 @@ export const ContactEntryForm = () => {
       item => item.name.toLowerCase() === newContact.name.toLowerCase()
     );
     if (isNameRepeat) {
-      alert(`${newContact.name} вже є в контактах.`);
+      alert(`${newContact.name} 
+already in contacts.`);
       return;
     }
     dispatch(addContact(newContact));

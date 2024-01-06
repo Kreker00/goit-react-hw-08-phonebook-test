@@ -6,7 +6,7 @@ import { ContactEntryForm } from 'components/ContactEntryForm/ContactEntryForm';
 import { fetchContacts } from 'redux/contacts/operations';
 import { selectIsLoading } from 'redux/contacts/selectors';
 
-export default function Tasks() {
+export default function Contacts() {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
 
@@ -17,7 +17,7 @@ export default function Tasks() {
   return (
     <>
       <Helmet>
-        <title>Your tasks</title>
+        <title>Your Contacts</title>
       </Helmet>
       <ContactEntryForm />
       <div>{isLoading && 'Request in progress...'}</div>
